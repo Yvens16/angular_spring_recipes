@@ -1,0 +1,3 @@
+-- Active: 1683723293309@@127.0.0.1@3306@recipes
+DROP DATABASE IF EXISTS recipes;
+CREATE DATABASE recipes;

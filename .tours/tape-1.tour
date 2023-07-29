@@ -1,0 +1,87 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Étape 1",
+  "steps": [
+    {
+      "file": "spring_app/src/main/resources/application.properties",
+      "description": "la propriété create-drop permet de repartir d'une base de données vide à chaque fois que l'application est arrêté et relancer. En l'occurence à chaque fois que vous sauvegardez votre code si vous avez ajouter la dépendance Spring Boot DevTools  ce qui est le cas ici. ahah.\n",
+      "line": 15
+    },
+    {
+      "file": "spring_app/src/main/resources/application.properties",
+      "description": "la propriété create-drop permet de repartir d'une base de données vide à chaque fois que l'application est arrêté et relancer. En l'occurence à chaque fois que vous sauvegardez votre code si vous avez ajouter la dépendance Spring Boot DevTools ce qui est le cas ici. ahah",
+      "line": 15
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "On commence par ajouter une entité User",
+      "line": 15
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "CascadeType.MERGE permet d'ajouter de nouveaux roles à un utilisateur ou de mettre à jour un role déjà existant là ou CascadeType.PERSIST ne permet que de créer de nouveaux roles. On aurait une erreur si un rôle existait déjà et qu'on essayait de l'ajouter à un nouvel utilisateur.",
+      "line": 24
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "```java\n@JoinTable(name = \"user_role\", joinColumns = @JoinColumn(name = \"user_id\"), inverseJoinColumns = @JoinColumn(name = \"role_id\"))\n```\nIci ce bout de code indique que l'on crée une table de jointure du nom de ```user_role```  avec des tuples composé d'un champs ```user_id``` faisant référence à l'id de la table User. Et d'un champs ```role_id``` faisant référence à l'id de la table Role.",
+      "line": 25
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Je vous passe l'explication des getters et des setters, mais la fonction qui suit permet d'afficher les roles associés à un utilisateur lorsque vous l'appeler.\n\n```java public String getRolesToString() {\n    String rolesToString = \"\";\n    for (Role role : roles) {\n      rolesToString += role.getTitle() + \" \";\n    }\n    return rolesToString;\n  }```",
+      "line": 56
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Le HashSet est un type de list dont les valeurs ne peuvent êre ni ```null``` ni présente en double.\nPratique pour s'assurer qu'une liste ne contient pas de doublon. Si vous essayer d'ajouter un élément alors qu'il se trouve déjà dans la liste cela ne fonctionnera pas. ",
+      "line": 27
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/Role.java",
+      "description": "Ensuite nous créeons l'entité Role pour définir les roles possibles dans notre application.",
+      "line": 1
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/repository/RoleRepository.java",
+      "description": "Nous n'oublions pas de créer les repository correspondant, celui la pour l'entité Role...",
+      "line": 3
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/repository/UserRepository.java",
+      "description": "Et celui la pour l'entité User",
+      "line": 1
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Par soucis de simplicité nous allons utiliser l'interface CommandLineRunner qui spécifie une méthode ```run``` qui s'éxécute juste après que l'application spring boot ai finit de s'initialiser.\nCela permet de lancer des actions sans avoir à créer un @Controller par exemple. On a juste à lancer le serveur et les actions s'éxécute direct. ",
+      "line": 24
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Ici après avoir crée des roles entre la ligne 27 et 31, je les sauvegarde en base de données à la ligne 33 et 34. Ce que vous devriez faire normalement aussi avant de créer des Utilisateurs. Si votre projet à un besoin pour des roles bien sûr. \n\n",
+      "line": 34
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Je crée ensuite un utilisateur du nom de ```user``` et un autre du nom de ```admin``` pour bien séparer les 2. ",
+      "line": 41
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Ici à la ligne 43 et 44 je vais bien spécifier la relation many to many entre mon utilisateur et son role de manière bidirectionnelle. Pourquoi Bidirectionnelle? Car comme ça je pourrais récuperer des utilisateurs selon leur role ou inversement. Je pourrais récuper tous roles d'un utilisateur.\n\nSi la relation était unidirectionnelle, je ne pourrais que récuperer les roles d'un utilisateurs mais pas l'inverse. ",
+      "line": 44
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Je le fais 2 fois ici pour l'admin en la ligne 50 et 54 parce que je lui ai ajouté le role ```ROLE_USER```  ainsi que le role ```ROLE_ADMIN```. ",
+      "line": 51
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Puis je finis par sauvegarder les utilisateur pour enregistrer les changements que je viens de faire par rapports aux utilisateurs que j'ai crée ainsi que le role que je leur ai assigné. ",
+      "line": 54
+    }
+  ],
+  "ref": "many_to_many_associations_spring_only"
+}
