@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "one-to-many-bidirectionnelle",
+  "steps": [
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Ici on va parler de la relation one-to-many bidirectionelle entre User et Boat. \nJe pourrais donc récupérer la liste des bateaux d'un utilisateur. Mais je pourrais aussi savoir à qui appartient un bateau à partir de l'objet Boat. Ce qui n'était pas possible avec l'obbjet Car. \n\nJe vais passer cette fois-ci la partie sur le repository. Je pense qu'on a compris.",
+      "line": 33
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Ici la relation one-to-many sera décrite de manière un peu différente:\nNous allons créer une variable ```boats``` qui va contenir la liste de bateau de notre utilisateur. Jusqu'ici rien de nouveau sous le soleil. \n\nC'est la que ça diffère:\n- L'annotation ```@OneToMany ``` nous indique ***qu'un user*** possède ***many boats***. \n- L'attribut ***mappedBy*** ici pointe vers l'attribut user qui se trouve dans l'entité ***Boat***, donc dans l'entité ***Boat*** il devrait y avoir un attribut ***user*** avec l'annotation *** @ManyToOne ***\n- Cascade type PERSIST: veut que lorsque je sauvegarde un USER, les objets Boat qui lui appartiennent si ils existent seront sauvegarder automatiquement aussi.\n- FetchType EAGER (implicite ici car non spécifié) veut dire que les Bateau seront chargé automatiquement au chargement de l'utilisateur. ",
+      "line": 35
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/Boat.java",
+      "description": "De l'autre côté:\n- L'annotation ***@ManyToOne*** nous indique l'autre côté de la relation bidirectionnelle\n- ***@JoinColumn*** nous indique la clé étrangère ``` user_id ``` . Vous pourrez la voir en regardant la table Boat dans votre base de données mysql.",
+      "line": 28
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/Boat.java",
+      "description": "En appellant la méthode:\n```java\n\n  public User getUser() {\n    return user;\n  }\n```\nSur l'objet Boat vous pourrez récupérer l'utilisateur à qui le bateau appartient. ",
+      "line": 55
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Maintenant que tout est bien branché:\n- On crée un utilisateur Yannick et on lui ajoute sa liste de bateau, dont font partie le Black Pearl et le Titanic.\n- Ensuite on sauvegarde Yannick en base données et vu qu'on à utilise le cascadeType ***PERSIST*** cela enregistre automatiquement les bateaux aussi en base sans avoir à utilisé le \n```java\nboatRepository.save()\n```",
+      "line": 64
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Vu qu'ici, nous avons une relation bidirectionnelle. \n\nOn peut récupérer la liste de bateau de Yannick.\n```java \nyannickStudent.getBoats()\n```",
+      "line": 68
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Mais on peut aussi dire que le bateau appartient à Yannick depuis l'objet Boat. Ce qui n'était pas possible avec L'objet Car. ",
+      "line": 72
+    }
+  ],
+  "ref": "one_to_many_associations_spring_only"
+}

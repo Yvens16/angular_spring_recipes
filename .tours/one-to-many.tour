@@ -1,0 +1,49 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "one-to-many unidirectionnelle",
+  "steps": [
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Dans cette recette nous allons voir la relation one-to-many qu'elle soit unidirecitionelle ou bidirectionnelle.\n\nUnidirecitionelle veut dire que l'on peut récupérer l'entité A de puis l'entité B mais pas l'inverse. \n\nTandis que Bidirectionelle veut dire qu'on peut récupérer l'entité A depuis B et inversement.\nIci j'ai créer 2 relations one-to-many:\n---\nUser ==> Car qui est unidirectionelle \n---\nUser ==> Boat qui est bidirectionelle\n---\n",
+      "line": 27,
+      "title": "Introduction"
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Commençons par la relation unidirectionnelle, ici je lie l'entité ***Car*** avec l'entité ***User*** par un champs ***user_id***. Vous pouvez considéré que l'annotation ```@JoinColumn ``` veut dire crée une clé étrangère dans dans l'entité de correspondance qui ici est ***Car***. Donc ici je crée une clé étrangère ***```user_id```*** dans l'entité Car.\n\nEt je déclare cette ligne:\n```java \nprivate List<Car> cars = new ArrayList<>();\n```\nPour préciser ou est ce que je vais stoker la liste de voiture de l'utilisateur.\nLorsque je récupère les voiture de l'utilsateur, je vais donc récupérer toutes les voiture qui ont en clé étrangère (user_id) la valeur de la clé primaire (id) de User.\n\nCela reviendrai à cette requête en sql:\n\n```sql\nSELECT * FROM car WHERE user_id = USER.id;\n```\n",
+      "line": 32,
+      "title": "Liaision entr User et Car"
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/repository/CarRepository.java",
+      "description": "Bien sûr je n'oublie pas de créer un repository pour chaque entité concernée. Ici c'est l'entité ```Car```\n\n```java\n@Repository\npublic interface CarRepository extends JpaRepository<Car, Long> {}\n```\n\nIci on passe l'entité concerné par le repository ``` Car  ``` ainsi que le type de la valeur qui représente sa clé primaire (id) ``` Long  ```",
+      "line": 14,
+      "title": "Repository "
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Ici comme cité un peu plus tôt dans le cours.\nJ'utilise la méthode\n```java\nUser.getCars()\n```\nAfin de récupérer toute les voitures qui ont en clé étrangère ***user_id*** équivalente à la clé primaire de l'utilisateur en question. (yvensBestTutor).\n\nJ'utilise la boucle pour afficher chaque modèle de la liste.\n",
+      "line": 47,
+      "title": "Permet de récupérer toutes les voitures du User"
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/User.java",
+      "description": "Ici nous pourrons donc récupérer la liste de Cars lié à l'utilisateur en question. En voici un example plus concret, repris du fichier ```SpringAppApplication.java```.\n\n```java \n\t\t\tfor (Car car : yvensBestTutor.getCars()) {\n\t\t\t\tSystem.out.println(\"Ma voiture numéro \" + (index + 1) + \" \" + car.getModel());\n\t\t\t\tindex += 1;\n\t\t\t}\n```\n\nIci je récupère toute les voiture lié à l'utilisateur et j'affiche chaque modèle qu'il possède.",
+      "line": 59,
+      "title": "Exemple de récupération"
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/entity/Car.java",
+      "description": "Du côté de l'entité Car, il n'y a rien à faire parce que la relation est unidirectionelle. ",
+      "line": 23,
+      "title": "Unidirectionelle (rien à faire dans Car)"
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "Maintenant que tout est bien branché, il ne me reste plus qu'a crée un utilisateur, lui crée une liste de voiture avant de l'enregistré en base de données. Ce qui est fais entre la ligne 35 et 41.",
+      "line": 42,
+      "title": "Création de User et ajout de Cars en base de données"
+    }
+  ],
+  "ref": "one_to_many_associations_spring_only"
+}
