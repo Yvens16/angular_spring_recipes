@@ -18,6 +18,8 @@ public class Car {
     this.model = model;
   }
 
+  public Car(){}; // JPA only
+
   public Long getId() {
     return id;
   }
