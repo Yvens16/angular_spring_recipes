@@ -44,6 +44,10 @@ public class SpringAppApplication {
 			Optional<List<User>> userLevelGreaterThan3 = userRepository.findByLevelGreaterThan(3);
 			userLevelGreaterThan3.get().stream().forEach((user) -> System.out
 					.println("nom du user avec un niveau supérieur à 3:  " + user.getUsername() + " level: " + user.getLevel()));
+
+			Optional<List<User>> userLevelAndActive = userRepository.findByLevelAndActive(5, true);
+			userLevelAndActive.get().stream().forEach((user) -> System.out.println("nom du user level 5 et active:  " + user.getUsername() + " level: " + user.getLevel() + " active: " + user.isActive()));
 		};
+
 	}
 }

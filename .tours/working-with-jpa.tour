@@ -45,6 +45,16 @@
       "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/jpa.md",
       "description": "### Liste de mots clé\n\nPour finir, je vous ai fais une petite liste de mots clé utilisable dans le méchanisme de JPA.\nIl vous suffit de rechercher cette id:`shd101wyy.markdown-preview-enhanced` dans la barre de recherche des extensions Vscode.\n\nAprès avoir installer l'extension, il vous suffit de faire la commande cmd-shift-v ou ctrl-shift-v en étant sur le fichier jpa.md pour l'afficher de manière plus lisible.",
       "line": 4
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/repository/UserRepository.java",
+      "description": "### Custom query\n\nMaintenant jetons un oeil query que vous pouvez créer en utilisant du SQL directement. \nIl vous suffit d'utiliser l'annotation `@Query` dans laquelle vous allez tapez votre requête.\nLorsque vous utiliser cette annotation, le nom de la méthode n'a pas de convention à suivre contrairement aux méthodes créer en utilisant le mécanisme de JPA. \n\nVous pouvez y passer des paramètres grâce à l'annotationn `@Param` et en utilisant les 2 points devant le paramètre dans la requête sql. Bien prendre le temps de comprendre le code ci-dessus. ",
+      "line": 24
+    },
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/SpringAppApplication.java",
+      "description": "### Call de la requête custom\n\nOn appelle la méthode comme tout autre méthodes.",
+      "line": 50
     }
   ],
   "ref": "working_with_spring_data_jpa_spring_only"

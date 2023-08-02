@@ -24,6 +24,10 @@ public class Generator {
     users.add(new User("user3", true, 3));
     users.add(new User("user4", false, 4));
     users.add(new User("user5", true, 5));
+    users.add(new User("user6", false, 5));
+    users.add(new User("user7", true, 5));
+
+
     userRepository.saveAll(users);
   }
 }
