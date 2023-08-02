@@ -1,17 +1,9 @@
 package com.yvens_belaston_recipes.spring_app.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -21,20 +13,22 @@ public class User {
   private Long id;
 
   private String username;
+  private boolean active;
+  private int level;
 
   /*
-   * Sans le @manytoone de l'autre coté, cela nous fais une relation unidirectionnelle
+   * Sans le @manytoone de l'autre coté, cela nous fais une relation
+   * unidirectionnelle
    * On ne pourra donc pas récupérer l'utilisateur à partir de la voiture
    */
-  @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id", nullable = false)
-  private List<Car> cars = new ArrayList<>();
-
-
-  @OneToMany(mappedBy = "user", cascade= CascadeType.PERSIST)
-  private List<Boat> boats = new ArrayList<>();
 
   public User() {
+  }
+
+  public User(String username, boolean active, int level) {
+    this.username = username;
+    this.active = active;
+    this.level = level;
   }
 
   public Long getId() {
@@ -53,19 +47,19 @@ public class User {
     this.username = username;
   }
 
-  public List<Car> getCars() {
-    return cars;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setCars(List<Car> cars) {
-    this.cars = cars;
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
-  public List<Boat> getBoats() {
-    return boats;
+  public int getLevel() {
+    return level;
   }
 
-  public void setBoats(List<Boat> boats) {
-    this.boats = boats;
+  public void setLevel(int level) {
+    this.level = level;
   }
 }
