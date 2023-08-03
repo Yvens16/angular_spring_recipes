@@ -3,31 +3,48 @@ package com.yvens_belaston_recipes.spring_app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.yvens_belaston_recipes.spring_app.entity.User;
+import com.yvens_belaston_recipes.spring_app.entity.Role;
+import com.yvens_belaston_recipes.spring_app.entity.UserEntity;
+import com.yvens_belaston_recipes.spring_app.repository.RoleRepository;
 import com.yvens_belaston_recipes.spring_app.repository.UserRepository;
 
 @Service
 public class Generator {
 
   private UserRepository userRepository;
+  private RoleRepository roleRepository;
+  private BCryptPasswordEncoder bcryptEncoder;
 
-  public Generator(UserRepository userRepository) {
+  public Generator(UserRepository userRepository, RoleRepository roleRepository,
+      BCryptPasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+    this.roleRepository = roleRepository;
+    this.bcryptEncoder = passwordEncoder;
   }
 
   public void generateUserList() {
-    List<User> users = new ArrayList<>();
-    users.add(new User("user1", true, 1));
-    users.add(new User("user2", false, 2));
-    users.add(new User("user3", true, 3));
-    users.add(new User("user4", false, 4));
-    users.add(new User("user5", true, 5));
-    users.add(new User("user6", false, 5));
-    users.add(new User("user7", true, 5));
+    Role admin = roleRepository.findById(1L).get();
+    Role user = roleRepository.findById(2L).get();
 
+    List<UserEntity> users = new ArrayList<>();
+    users.add(new UserEntity("user1", bcryptEncoder.encode("password"), true, 1, user));
+    users.add(new UserEntity("user2", bcryptEncoder.encode("password"), false, 2, user));
+    users.add(new UserEntity("user3", bcryptEncoder.encode("password"), true, 3, user));
+    users.add(new UserEntity("user4", bcryptEncoder.encode("password"), false, 4, user));
+    users.add(new UserEntity("user5", bcryptEncoder.encode("password"), true, 5, admin));
+    users.add(new UserEntity("user6", bcryptEncoder.encode("password"), false, 5, admin));
+    users.add(new UserEntity("user7", bcryptEncoder.encode("password"), true, 5, admin));
 
     userRepository.saveAll(users);
+  }
+
+  public void generateRoles() {
+    List<Role> roles = new ArrayList<>();
+    roles.add(new Role("ADMIN"));
+    roles.add(new Role("USER"));
+    roleRepository.saveAll(roles);
   }
 }
