@@ -33,6 +33,7 @@ public class UserEntity {
 
   private String password;
   private String username;
+  private String email;
   private boolean active;
   private int level;
 
@@ -46,12 +47,13 @@ public class UserEntity {
   }
 
 
-  public UserEntity(String username, String password, boolean active, int level, Role role) {
+  public UserEntity(String username, String password, boolean active, int level, Role role, String email) {
     this.username = username;
     this.active = active;
     this.level = level;
     this.role = role;
     this.password = password;
+    this.email = email;
   }
 
   public Long getId() {
@@ -111,6 +113,16 @@ public class UserEntity {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+
+  public String getEmail() {
+    return email;
+  }
+
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
 }

@@ -11,4 +11,5 @@ import com.yvens_belaston_recipes.spring_app.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
   Optional<UserEntity> findByUsername(String string);
+  Optional<UserEntity> findByEmail(String string);
 }

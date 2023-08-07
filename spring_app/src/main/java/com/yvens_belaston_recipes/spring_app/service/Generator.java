@@ -30,13 +30,13 @@ public class Generator {
     Role user = roleRepository.findById(2L).get();
 
     List<UserEntity> users = new ArrayList<>();
-    users.add(new UserEntity("user1", bcryptEncoder.encode("password"), true, 1, user));
-    users.add(new UserEntity("user2", bcryptEncoder.encode("password"), false, 2, user));
-    users.add(new UserEntity("user3", bcryptEncoder.encode("password"), true, 3, user));
-    users.add(new UserEntity("user4", bcryptEncoder.encode("password"), false, 4, user));
-    users.add(new UserEntity("user5", bcryptEncoder.encode("password"), true, 5, admin));
-    users.add(new UserEntity("user6", bcryptEncoder.encode("password"), false, 5, admin));
-    users.add(new UserEntity("user7", bcryptEncoder.encode("password"), true, 5, admin));
+    users.add(new UserEntity("user1", bcryptEncoder.encode("password"), true, 1, user, "email@gmail.com"));
+    users.add(new UserEntity("user2", bcryptEncoder.encode("password"), false, 2, user, "email@gmail.com"));
+    users.add(new UserEntity("user3", bcryptEncoder.encode("password"), true, 3, user, "email@gmail.com"));
+    users.add(new UserEntity("user4", bcryptEncoder.encode("password"), false, 4, user, "email@gmail.com"));
+    users.add(new UserEntity("user5", bcryptEncoder.encode("password"), true, 5, admin, "email@gmail.com"));
+    users.add(new UserEntity("user6", bcryptEncoder.encode("password"), false, 5, admin, "email@gmail.com"));
+    users.add(new UserEntity("user7", bcryptEncoder.encode("password"), true, 5, admin, "email@gmail.com"));
 
     userRepository.saveAll(users);
   }

@@ -1,6 +1,5 @@
 package com.yvens_belaston_recipes.spring_app;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +25,6 @@ public class SpringAppApplication {
 	public CommandLineRunner run() throws Exception {
 		return (String[] args) -> {
 			generatorService.generateRoles();
-			generatorService.generateUserList();
 		};
 
 	}
