@@ -8,16 +8,16 @@ public class main {
 
   @GetMapping("/")
   public String index() {
-    return "hello.html";
+    return "hello";
   }
 
   @GetMapping("/login")
   public String login() {
-    return "login.html";
+    return "login";
   }
 
   @GetMapping("/admin")
   public String admin() {
-    return "admin.html";
+    return "admin";
   }
 }
