@@ -1,0 +1,92 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "authentication_authorization_angular_spring",
+  "steps": [
+    {
+      "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/controller/UserController.java",
+      "description": "# Pre Intro\n\nAvant d'aller sur notre front nous allons nous assurer que nous pouvons effectivement faire des appels api sur notre serveur en lui ajoutant les règles CORS. (Cross-Origin Ressource Sharing).\n\nCORS est méchanisme qui permet au serveur de dire qu'elle client(application front ou un autre serveur) à droit d'accéder à ces ressources. Je vous laisse faire vos recherches pour avoir plus d'information. ",
+      "line": 21
+    },
+    {
+      "file": "angular_app/src/app/authentication.service.ts",
+      "description": "# AuthenticationService\n\nNous allons d'abord commencer par créer un service pour gérer nos méthodes d'authentication (login, register, logout).\n\nng g s authentication: est la commande pour créer le service",
+      "line": 10,
+      "selection": {
+        "start": {
+          "line": 4,
+          "character": 4
+        },
+        "end": {
+          "line": 4,
+          "character": 57
+        }
+      }
+    },
+    {
+      "file": "angular_app/src/app/authentication.service.ts",
+      "description": "# Register\n\nIci notre méthode register est une simple requête api sur la route register de notre UserController dans le serveur spring. Elle doit donc nous renvoyer les info de notre utilisateur et notre Token.\n\nUne fois le token renvoyé, nous l'ajoutons dans le localStorage.\n\nPourquoi nous renvoyons le token à l'inscription ? Parce que nous avons décidé de connecter notre utilisateur directement à l'inscription tout simplement. On purrait aussi décider de ne pas le faire. Cela dépend de vous.",
+      "line": 38,
+      "selection": {
+        "start": {
+          "line": 5,
+          "character": 1
+        },
+        "end": {
+          "line": 5,
+          "character": 65
+        }
+      }
+    },
+    {
+      "file": "angular_app/src/app/app.component.ts",
+      "description": "# Appel de Register\n\nNous appelons notre méthode register une fois que l'utilisateur ai rempli notre formulaire avec ces données dans une méthode onSubmit lié au formulaire d'inscription.",
+      "line": 36
+    },
+    {
+      "file": "angular_app/src/app/authentication.service.ts",
+      "description": "# Login\n\nNous avons fais de même pour le login, nous appellons la route /login de notre UserController dans le serveur spring. En lui passant les données nécessaires (email, password).\n\nIl devra donc nous renvoyer nos données de l'utilisateur avec son token ou une erreur.\n\nUne fois le token renvoyé, nous l'ajoutons dans le localStorage.",
+      "line": 24
+    },
+    {
+      "file": "angular_app/src/app/app.component.ts",
+      "description": "# Appel de login\n\nLa méthode login de l'euthenticationService est appelé ici une fois que notre utilisateur à rempli son formulaire de connexion.\n\nVous pouvez tester en lançant votre serveur angular ainsi que votre serveur spring. \n\nCommencer par créer un utilisateur  puis connecter vous avec les identifiants utilisé à la création.",
+      "line": 56
+    },
+    {
+      "file": "angular_app/src/app/authentication.service.ts",
+      "description": "# Requête d'une route protégé\n\nIci nous allons faire un appel sur une route protégée qui ne vérifie que si l'utilisateur est connecté et si il a un rôle USER.",
+      "line": 50,
+      "selection": {
+        "start": {
+          "line": 3,
+          "character": 1
+        },
+        "end": {
+          "line": 3,
+          "character": 128
+        }
+      }
+    },
+    {
+      "file": "angular_app/src/app/authentication.service.ts",
+      "description": "Ici nous allons faire un appel sur une route protégée qui ne vérifie que si l'utilisateur est connecté et si il a un rôle ADMIN.\n\nMaintenant, on se demande mais où est le token que l'on passe à notre serveur pour authentifier ? Et bien il se trouve dans notre fichier interceptor !",
+      "line": 60
+    },
+    {
+      "file": "angular_app/src/app/header.interceptor.ts",
+      "description": "# Interceptor\n\nPour créer ce fichier, nous allons éxécuter la commmande ng g interceptor dans le terminal.\nUne classe de type HttpInterceptor permet simplement d'intercépter les requêtes faites par l'application angular et de les modifier pour convenir à nos besoins.",
+      "line": 16
+    },
+    {
+      "file": "angular_app/src/app/header.interceptor.ts",
+      "description": "# Ajouter le token ici\n\nIci nous allons vouloir intercepter les requêtes pour y ajouter le token d'authentification à notre serveur spring. ",
+      "line": 24
+    },
+    {
+      "file": "angular_app/src/app/header.interceptor.ts",
+      "description": "# Sur quelles requêtes ?\n\nNous n'aurons pas besoin d'authentifier notre utilisateur sur toutes les requêtes. Nous allons donc lister les routes protégées de notre serveur. Et on va ajouter notre token lorsque nous feront appelles à ces routes spécifiquement.\n\nPs: nous devons faire un clone de la requête (request.clone) car elle est immuable par défault donc, on ne peut pas la modifer. Par contre on peut en faire une copie et modifier cette copie.\n\nPps: La méthode (next.handle) est la méthode qui permet de passer le contrôle d'un intercepteur à un autre si il y'en a plusieurs. Et si il y'en a plus ou si il y'en a un seul comme dans notre exemple, cela permet d'envoyer la requête au serveur.",
+      "line": 39
+    }
+  ],
+  "ref": "authentication_authorization_spring_angular"
+}
