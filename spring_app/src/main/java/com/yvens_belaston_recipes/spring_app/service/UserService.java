@@ -71,6 +71,7 @@ public class UserService {
     if (!verifyHashedPasswordDuringLogin(user.getPassword(), userEntity.getPassword())) {
       throw new RuntimeException("Le mot de passe est incorrect");
     }
+    user.setUsername(userEntity.getUsername());
     user.setRole(userEntity.getRole().getType());
     return user;
   }

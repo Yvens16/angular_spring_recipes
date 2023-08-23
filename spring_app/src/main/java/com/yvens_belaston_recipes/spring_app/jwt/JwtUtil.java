@@ -28,6 +28,7 @@ public class JwtUtil {
   }
 
   private String createToken(Map<String, Object> claims, String subject) {
+    System.out.println("@@@@@@@@@@@ " + claims +  "Subject " +  subject);
     return Jwts
         .builder()
         .setClaims(claims)
@@ -47,6 +48,7 @@ public class JwtUtil {
 
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
+    System.out.println("&&&&&&&& +  "+ claims);
     return claimsResolver.apply(claims);
   }
 

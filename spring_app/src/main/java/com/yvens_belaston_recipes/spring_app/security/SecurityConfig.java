@@ -12,7 +12,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.yvens_belaston_recipes.spring_app.filters.JwtRequestFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -30,14 +29,14 @@ public class SecurityConfig {
 
   // @Bean
   // public UserDetailsService userDetailsService(UserRepository userRepository) {
-  //   return new UserDetailsService() {
-  //     @Override
-  //     public UserDetails loadUserByUsername(String username) {
-  //       UserEntity user = userRepository.findByUsername(username).get();
-  //       System.out.println("@@@@@ " + user.getRole());
-  //       return user.asUserDetails();
-  //     }
-  //   };
+  // return new UserDetailsService() {
+  // @Override
+  // public UserDetails loadUserByUsername(String username) {
+  // UserEntity user = userRepository.findByUsername(username).get();
+  // System.out.println("@@@@@ " + user.getRole());
+  // return user.asUserDetails();
+  // }
+  // };
   // }
 
   @Bean
@@ -49,15 +48,17 @@ public class SecurityConfig {
             .requestMatchers("/admin", "/only-admin-data").hasAuthority("ADMIN")
             .requestMatchers("/other_routes_example/**")
             .authenticated())
-        .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // You can disable csrf protection by removing this line
+        .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // You can disable csrf
+                                                                                                // protection by
+                                                                                                // removing this line
             .ignoringRequestMatchers("/register", "/login")
-            .disable()  // Décommentez pour désactiver en entier la protection CSRF en développement
-            )
+            .disable() // Décommentez pour désactiver en entier la protection CSRF en développement
+        )
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)// Spring Security ne crée pas de session
         // Nous allons utiliser JWT pour gérer les sessions
         );
-    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(this.jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build(); // Très important de retourner le résultat de la méthode build() !
     // Sinon rien de tout ça ne fonctionne !
   }

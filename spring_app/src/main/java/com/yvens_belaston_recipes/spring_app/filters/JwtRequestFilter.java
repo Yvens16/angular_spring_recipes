@@ -26,48 +26,49 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     this.jwtUtilService = jwtUtileService;
     this.userDetailsService = userDetailsService;
   }
-  
-
 
   @Override
   protected void doFilterInternal(
-    HttpServletRequest request,
-    HttpServletResponse response,
-    FilterChain chain
-  ) throws ServletException, IOException {
+      HttpServletRequest request,
+      HttpServletResponse response,
+      FilterChain chain) throws ServletException, IOException {
     final String authorizationHeader = request.getHeader("Authorization");
-        System.out.println("@@@@@@@@@@@ " + authorizationHeader);
+    System.out.println("@@@@@@@@@@@ " + authorizationHeader);
 
     String username = null;
     String token = null;
 
-    // ############### 1. Récupération du token et du username dans le header ################
+    // ############### 1. Récupération du token et du username dans le header
+    // ################
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
       token = authorizationHeader.substring(7);
-      
+      System.out.println("@@@@@@@@@@@  token" + token);
+
       username = jwtUtilService.extractUsername(token);
+      System.out.println("@@@@@@@@@@@  username" + username);
+
     }
-    
 
     // ############### 2. Vérification du token ################
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
       if (jwtUtilService.validateToken(token, userDetails)) {
-        // UsernamePasswordAuthenticationToken est un container qui va contenir les informations de l'utilisateur dans le contexte de sécurité 
+        // UsernamePasswordAuthenticationToken est un container qui va contenir les
+        // informations de l'utilisateur dans le contexte de sécurité
         var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-          userDetails, // Le User
-          null, // Le mdp mais pas besoin ici
-          userDetails.getAuthorities() // les Rôles
+            userDetails, // Le User
+            null, // Le mdp mais pas besoin ici
+            userDetails.getAuthorities() // les Rôles
         );
         usernamePasswordAuthenticationToken.setDetails(
-          new WebAuthenticationDetailsSource().buildDetails(request)
-        );
+            new WebAuthenticationDetailsSource().buildDetails(request));
         System.out.println("@@@@@@@@@@@ " + usernamePasswordAuthenticationToken);
-        // On ajoute UsernamePasswordAuthenticationToken dans le contexte de sécurité juste ici avec le set
+        // On ajoute UsernamePasswordAuthenticationToken dans le contexte de sécurité
+        // juste ici avec le set
         SecurityContextHolder
-          .getContext()
-          .setAuthentication(usernamePasswordAuthenticationToken);
+            .getContext()
+            .setAuthentication(usernamePasswordAuthenticationToken);
       }
     }
     chain.doFilter(request, response);
