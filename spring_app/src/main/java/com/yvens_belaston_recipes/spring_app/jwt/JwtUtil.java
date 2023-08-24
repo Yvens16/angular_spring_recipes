@@ -29,6 +29,8 @@ public class JwtUtil {
 
   private String createToken(Map<String, Object> claims, String subject) {
     System.out.println("@@@@@@@@@@@ " + claims +  "Subject " +  subject);
+
+    // {    "role": "USER", "username": "Yvens"   }
     return Jwts
         .builder()
         .setClaims(claims)
@@ -38,11 +40,13 @@ public class JwtUtil {
             1000 * 60 * 60 * 10))
         .signWith(getKey(), SignatureAlgorithm.HS256)
         .compact();
+        /**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c */
   }
 
   public String generateToken(UserDto userDetails) {
     Map<String, Object> claims = new HashMap<>();
     claims.put("role", userDetails.getRole());
+    // {    "role": "USER"   } ||||||||           "Yvens"
     return createToken(claims, userDetails.getUsername());
   }
 

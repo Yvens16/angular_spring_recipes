@@ -42,6 +42,7 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        .cors(cors -> cors.configure(http))
         .authorizeHttpRequests((requests) -> requests
             .requestMatchers("/register", "/login", "/permit").permitAll()
             .requestMatchers("/logout", "/user-admin-data").hasAnyAuthority("USER", "ADMIN")

@@ -33,7 +33,6 @@ public class UserController {
   public ResponseEntity<ApiResponse<Object>> register(@RequestBody UserDto user) {
     HashMap<String, Object> data = new HashMap<>();
     try {
-
       userService.register(user);
       String token = jwtUtilService.generateToken(user);
       data.put("user", user);
@@ -50,8 +49,9 @@ public class UserController {
   public ResponseEntity<ApiResponse<Object>> login(@RequestBody UserDto user) {
     HashMap<String, Object> data = new HashMap<>();
     try {
-      userService.login(user);
+      UserDto user2 = userService.login(user);
       String token = jwtUtilService.generateToken(user);
+        /**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c */
       data.put("user", user);
       data.put("token", token);
       return new ResponseEntity<>(new ApiResponse<>(data), HttpStatus.OK);

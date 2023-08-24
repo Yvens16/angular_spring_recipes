@@ -25,7 +25,7 @@ export class HeaderInterceptor implements HttpInterceptor {
     // Cette liste doit être complétée avec les urls qui nécessitent une authentification
     const protectedUrls = ["/only-admin-data", "/user-admin-data"];
 
-    const urlRoute = new URL(request.url).pathname;
+    const urlRoute = new URL(request.url).pathname; // http://localhost:8080/only-admin-data => /only-admin-data
 
     if (protectedUrls.includes(urlRoute)) {
       return next.handle(
