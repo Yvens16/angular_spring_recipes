@@ -1,0 +1,25 @@
+// {
+//   "version": "2.0.0",
+//   "tasks": [
+//     {
+//       "label": "Run Client Server",
+//       "type": "shell",
+//       "command": "cd angular_app && npm i && npm start",
+//       "runOptions": { "runOn": "folderOpen" },
+//       "presentation": {
+//         "reveal": "always",
+//         "panel": "new"
+//       }
+//     },
+//     {
+//       "label": "Run Spring Boot App",
+//       "type": "shell",
+//       "command": "cd spring_app && mvn spring-boot:run",
+//       "runOptions": { "runOn": "folderOpen" },
+//       "presentation": {
+//         "reveal": "always",
+//         "panel": "new"
+//       }
+//     }
+//   ]
+// }

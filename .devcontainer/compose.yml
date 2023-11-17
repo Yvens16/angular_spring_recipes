@@ -1,0 +1,32 @@
+services:
+  dev:
+    build: .
+    volumes:
+      - ../..:/workspaces:cached
+    networks:
+      - web-db-network
+    ports:
+      - "4200:4200"
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PASSWORD: rootpassword
+      MYSQL_DB: recipes
+    command: sleep infinity
+  db:
+    image: mysql/mysql-server:8.0.23 #mysql:8.0.19
+    environment:
+      MYSQL_PASSWORD: rootpassword
+      MYSQL_DB: recipes
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbData:/var/lib/mysql
+      - ./initdb.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - web-db-network
+volumes:
+  dbData:
+networks:
+  web-db-network:
+

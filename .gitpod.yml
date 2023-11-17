@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.dockerfile 
+tasks:
+  - name: "Angular Setup"
+    init: |
+      cd angular_app
+      npm install
+    command: npm start
+  - name: "Spring Boot Setup"
+    #before: sudo usermod -a -G sdkman gitpod && sudo usermod -a -G nvm gitpod && sudo chown -R gitpod /usr/local/sdkman /usr/local/share/nvm
+    init: |
+      cd spring_app
+      ./mvnw install
+    command: mvn spring-boot:run # or ./mvnw spring-boot:run
+#vscode:
+ # extensions:
+ # - vscjava.vscode-java-pack
+ # - redhat.vscode-xml
