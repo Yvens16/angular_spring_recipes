@@ -9,7 +9,7 @@
     },
     {
       "file": "spring_app/src/main/java/com/yvens_belaston_recipes/spring_app/controller/UserController.java",
-      "description": "# L'utilisateur s'inscrit\n\nÀ l'inscription, l'utilisateur va appeller cette méthode (sur la route ```\"/register\"```) avec les informations qu'il aura rentrer sur son formulaire.\n```java\nprivate String username\nprivate String password\nprivate String email\n```\nNous allons donc créer cette utilisateur et l'enregistrer en base.\n```java\n  userService.register\n```\nAllons jeter un oeil dans la méthode avant de revenir ici.",
+      "description": "# L'utilisateur s'inscrit\n\nÀ l'inscription, l'utilisateur va appeler cette méthode (sur la route ```\"/register\"```) avec les informations qu'il aura renseignées sur son formulaire.\n\n```java\nprivate String username\nprivate String password\nprivate String email\n```\nNous allons donc créer cet utilisateur et l'enregistrer en base de données\n```java\n  userService.register\n```\nAllons jeter un œil à la méthode avant de revenir ici.",
       "line": 44
     },
     {
