@@ -80,6 +80,7 @@ public class StudentRepositoryTest {
 
   @Test
   public void customMethod() {
+    // Arrange ===> préparer l'environnement du test
     Student student = new Student("Jean", 14);
     Student student2 = new Student("Marc", 15);
     Student student3 = new Student("Baptiste", 17);
@@ -91,7 +92,10 @@ public class StudentRepositoryTest {
     this.studentRepository.save(student4);
     this.studentRepository.save(student5);
 
+    // Act ===> j'effectue mon action
     List<Student> students = this.studentRepository.findByAgeGreaterThanEqual(18);
+
+    // Assert ===> Je vérifie le résultat de mon action
     Assertions.assertThat(students.size()).isEqualTo(2);
   }
 }

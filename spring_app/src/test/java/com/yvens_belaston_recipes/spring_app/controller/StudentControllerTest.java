@@ -48,24 +48,31 @@ public class StudentControllerTest {
 
   @BeforeEach
   public void init() {
+    // Arrange avant chaque tests automatiquement
     student = new Student("Yvens", 27);
     studentDto = new StudentDto("Yvens", 27);
   }
 
   @Test
   public void getStudentsController() throws Exception {
+
+    // Arrange
     StudentDto studentDto2 = new StudentDto("Marc", 14);
     List<StudentDto> students = new ArrayList<>();
     students.add(this.studentDto);
     students.add(studentDto2);
-    when(studentService.getStudents()).thenReturn(students);
+    when(studentService.getStudents()).thenReturn(students); // mockito mock les données en retour de la fonction getStudents
+
+    // Act 
     ResultActions response = this.mockMvc.perform(
         get("/students")
             .contentType(MediaType.APPLICATION_JSON));
 
+   // Assert 
     response
         .andExpect(MockMvcResultMatchers.status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(students.size())));
+        //   $ correspond ===> [ student1, student2]   donc $.size() ===> équivaut à array.size()
   }
 
   @Test
@@ -90,6 +97,8 @@ public class StudentControllerTest {
         .andExpect(MockMvcResultMatchers.jsonPath("$.age", CoreMatchers.is(studentDto.getAge())))
         .andExpect(MockMvcResultMatchers.jsonPath("$.name", CoreMatchers.is(studentDto.getName())))
         .andDo(print());
+
+        // $ ===> { name: "Yvens", age: 27 }    
   }
 
 }

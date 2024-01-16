@@ -33,11 +33,16 @@ public class StudentServiceTest {
 
   @Test
   public void createStudentService() {
+
+    // Arrange 
     Student student = new Student("Yvens", 27);
     StudentDto studentDto = new StudentDto("Yvens", 27);
     when(studentRepository.save(Mockito.any(Student.class))).thenReturn(student);
 
+    // Act
     StudentDto savedStudent = studentService.createStudent(studentDto);
+
+    // Assert
     Assertions.assertThat(savedStudent.getName()).isEqualTo("Yvens");
   }
 
