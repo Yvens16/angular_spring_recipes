@@ -23,7 +23,6 @@ public class StudentService {
     Student student = new Student(studentDto.getName(), studentDto.getAge());
     Student savedStudent = this.studentRepository.save(student);
     StudentDto studentDtoToReturn = new StudentDto(savedStudent.getName(), savedStudent.getAge());
-    System.out.println("@@@@@@@@@@ : " + studentDtoToReturn.getName());
     return studentDtoToReturn;
   }
 
