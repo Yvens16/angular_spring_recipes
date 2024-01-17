@@ -4,18 +4,25 @@ import { FetchService } from './fetch.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
+// Test d'un service qui fais un appel api
 
+
+
+// Permet de renvoyer un observable car on utilise HttpClient de '@angular/common/http'
 function returnObservable(data: any) {
-  // HttpClient method expect to return Observables
   return of(data);
 }
 
+// Typer  la variable
 let httpClientSpy: jasmine.SpyObj<HttpClient>;
 describe('FetchService', () => {
+
   let service: FetchService;
 
   beforeEach(() => {
+    // Mocker l'appel api get de HttpCLient
     httpClientSpy = jasmine.createSpyObj('HttpCLient', ['get']);
+
     TestBed.configureTestingModule({ providers: [FetchService, { provide: HttpClient, useValue: httpClientSpy }] });
     service = TestBed.inject(FetchService);
   });
@@ -33,8 +40,10 @@ describe('FetchService', () => {
         "characterDirection": "Left"
       }
     ];
+    // Définir la valeur de retour de l'appel api
     httpClientSpy.get.and.returnValue(returnObservable(expectedQuotes));
 
+    // Faire l'appel api et tester la valeur de retour en cas de réussite
     service.getData().subscribe({
       next: (quotes) => {
         expect(quotes).withContext("context").toEqual(expectedQuotes)
@@ -46,6 +55,7 @@ describe('FetchService', () => {
   });
 
   it("Should return an error when the server fails", (done: DoneFn) => {
+    // Faire l'appel api et tester la valeur de retour en cas d'échec
     const errorResponse = new HttpErrorResponse({
       error: "404 error",
       status: 404,

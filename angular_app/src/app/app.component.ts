@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular_app';
+  show: boolean = true;
+
+  showTitle() {
+    this.show = !this.show;
+  }
 }
