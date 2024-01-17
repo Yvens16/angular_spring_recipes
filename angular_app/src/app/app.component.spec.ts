@@ -12,6 +12,7 @@ fdescribe('AppComponent', () => {
 
   // ################## Test The instance of the component in typescript ##################
 
+  // Instance du composant c'est le fichier ts
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
@@ -32,6 +33,7 @@ fdescribe('AppComponent', () => {
   // ################## Test the DOM of the component html ##################
 
 
+  // Le DOM du composant c'est le fichier html
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
