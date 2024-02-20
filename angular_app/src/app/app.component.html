@@ -22,11 +22,11 @@
 <h1>Login Form</h1>
 
 <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-  <label for="email">Email: </label>
-  <input id="email" type="text" formControlName="email" />
+  <label for="email_login">Email: </label>
+  <input id="email_login" type="text" formControlName="email" />
 
-  <label for="password">Password: </label>
-  <input id="password" type="password" formControlName="password" />
+  <label for="password_login">Password: </label>
+  <input id="password_login" type="password" formControlName="password" />
   <button type="submit" [disabled]="!loginForm.valid">Log in</button>
 </form>
 
@@ -35,6 +35,8 @@
   <pre>{{loginData | json}}</pre>
 </div>
 
+<h1>Logout</h1>
+<button (click)="logout()">Log Out</button>
 
 <h1>Obtenir les données des routes protégés</h1>
 <button (click)="getUserData()">get User Data</button>
@@ -46,3 +48,9 @@
 
 <button (click)="getAdminOnlyData()">get Admin Data</button>
 <pre *ngIf="adminOnlyData">{{adminOnlyData | json}}</pre>
+<nav>
+  <a routerLink="/public">Route Public</a>
+  <br>
+  <a routerLink="/protected">Route Protéger</a>
+</nav>
+<router-outlet></router-outlet>

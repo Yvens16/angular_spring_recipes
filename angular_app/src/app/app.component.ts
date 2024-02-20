@@ -33,6 +33,7 @@ export class AppComponent {
       }).subscribe((data: any) => {
         console.log('data in subscription:', data)
         this.registerData = data;
+        const token = data.data.token;
       });
     }
   }
@@ -51,6 +52,7 @@ export class AppComponent {
       this.authenticationService.login(email, password).subscribe((data: any) => {
         console.log('data in subscription:', data)
         this.loginData = data;
+        const token = data.data.token;
       });
     }
   }
@@ -67,6 +69,10 @@ export class AppComponent {
       console.log('getAdminOnlyData in subscription:', data)
       this.adminOnlyData = data;
     });
+  }
+
+  logout() {
+    localStorage.clear();
   }
 
 }

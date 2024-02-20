@@ -7,10 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderInterceptor } from './header.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PublicComponent } from './public/public/public.component';
+import { ProtectedComponent } from './protected/protected/protected.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PublicComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,
