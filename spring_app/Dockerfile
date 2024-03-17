@@ -20,5 +20,5 @@ FROM base as build
 RUN ./mvnw package
 
 FROM eclipse-temurin:17-jre-jammy as production
-COPY --from=build /workspace/app/target/spring_app-0.0.1-SNAPSHOT.jar spring_app.jar
-CMD ["java", "-jar", "/spring_app.jar"]
+COPY --from=build /workspace/app/target/*.jar backend.jar
+CMD ["java", "-jar", "/backend.jar"]
