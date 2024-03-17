@@ -43,8 +43,5 @@ jobs:
       #     labels: ${{ steps.meta.outputs.labels }}
       - name: Build and push to docker hub
         run: |
-          docker-compose build
-          docker-compose push
-        with:
-          context: .
-          file: ./spring_app/docker-compose.yml
+          docker-compose -f ./spring_app/docker-compose.yml build
+          docker-compose -f ./spring_app/docker-compose.yml push
