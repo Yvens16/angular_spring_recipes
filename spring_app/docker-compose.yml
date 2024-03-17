@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${DOCKER_TARGET}
+    image: yvens/docker_ci_spring_only:latest
+    container_name: docker_ci_spring_only
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      SPRING_ENV: ${SPRING_ENV}
+    working_dir: /workspace/app
+
+# https://docs.docker.com/compose/environment-variables/set-environment-variables/#substitute-with---env-file
+# docker compose --env-file ./config/.env.dev up to run with dev env
+# docker-compose --env-file .env.dev up --build  
+
+# Guide to create the github action
