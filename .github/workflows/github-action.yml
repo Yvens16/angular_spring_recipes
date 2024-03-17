@@ -45,3 +45,6 @@ jobs:
         run: |
           docker-compose build
           docker-compose push
+        with:
+          context: .
+          file: ./spring_app/docker-compose.yml
