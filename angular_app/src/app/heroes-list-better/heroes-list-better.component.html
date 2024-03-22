@@ -1,0 +1,11 @@
+<p>heroes-list-better works!</p>
+
+<!-- <div *ngIf="heroes"> -->
+  <ul class="heroes_container">
+    <li *ngFor="let hero of heroes">{{ hero.name }}</li>
+  </ul>
+<!-- </div> -->
+
+<div *ngIf="!heroes">
+  <h1>Empty state</h1>
+</div>

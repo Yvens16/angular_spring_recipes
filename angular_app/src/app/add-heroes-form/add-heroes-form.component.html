@@ -1,1 +1,9 @@
 <p>add-heroes-form works!</p>
+<form  #form="ngForm" (ngSubmit)="handleSubmit()">
+  <label for="name">
+    name
+    <input type="text" id="name" name="name" [(ngModel)]="name">
+    <span *ngIf="submitted && !name">name is missing</span>
+  </label>
+  <button type="submit">Submit</button>
+</form>

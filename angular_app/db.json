@@ -1,0 +1,128 @@
+{
+  "heroes": [
+    {
+      "id": "1",
+      "name": "Superman"
+    },
+    {
+      "id": "2",
+      "name": "Batman"
+    },
+    {
+      "id": "3",
+      "name": "Wonder Woman"
+    },
+    {
+      "id": "e668",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "9c3d",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "0180",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "23fc",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "a660",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "1175",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "d018",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "c4cc",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "3207",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "bd7b",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "d971",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "1ccd",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "f677",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "3bbe",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "1c3c",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "05d0",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "81c1",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "f2db",
+      "name": null
+    },
+    {
+      "id": "d298",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "428d",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "6a97",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "5236",
+      "name": "Green Lantern"
+    },
+    {
+      "id": "182b",
+      "name": "Yvens"
+    },
+    {
+      "id": "17e7",
+      "name": null
+    },
+    {
+      "id": "1248",
+      "name": "Yvens"
+    },
+    {
+      "id": "8915",
+      "name": "Yvens"
+    },
+    {
+      "id": "36dc",
+      "name": "Yvens"
+    },
+    {
+      "id": "d018",
+      "name": "Yvens"
+    }
+  ]
+}
